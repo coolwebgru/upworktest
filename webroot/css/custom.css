@@ -1,0 +1,9 @@
+.main-body {
+	background-color: rgb(242, 242, 242);
+	height: 100%;
+    max-width: 940px
+}
+
+.margin-top-20 {
+	margin-top: 20px;
+}
