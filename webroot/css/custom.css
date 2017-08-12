@@ -1,9 +1,82 @@
 .main-body {
 	background-color: rgb(242, 242, 242);
 	height: 100%;
-    max-width: 940px
+    max-width: 940px;
+}
+
+.padding-left-50 {
+	padding-left: 50px;
 }
 
 .margin-top-20 {
 	margin-top: 20px;
+}
+
+.btn-start {
+    width: 140px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    border: solid rgba(43, 108, 163, 1) 1px;
+    cursor: pointer !important;
+    color: #FFFFFF;
+    font-size: 18px;
+    display: inline-block;
+    border-radius: 7px;
+    transition: all .2s ease-in;
+    background: rgba(20, 29, 61, 1);
+}
+
+.btn-start:hover {
+    background: rgba(0, 46, 93, 1);
+    color: white;
+}
+
+.btn-continue {
+    width: 120px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    border: solid rgba(43, 108, 163, 1) 1px;
+    cursor: pointer !important;
+    color: #FFFFFF;
+    font-size: 18px;
+    display: inline-block;
+    border-radius: 7px;
+    transition: all .2s ease-in;
+    background: rgba(20, 29, 61, 1);
+}
+
+.btn-continue:hover {
+    background: rgba(0, 46, 93, 1);
+    color: white;
+}
+
+.font-20px {
+	font-size: 20px;
+}
+
+.container {
+	padding-right: 50px;
+	padding-left: 50px;
+}
+
+.font-22px {
+	font-size: 22px;
+}
+
+.margin-top-50 {
+	margin-top: 50px;
+}
+
+.answer-container {
+	border: 1px solid rgb(212, 212, 212);
+}
+
+.font-17px {
+	font-size: 17px;
+}
+
+.margin-top-5 {
+	margin-top: 5px;
 }

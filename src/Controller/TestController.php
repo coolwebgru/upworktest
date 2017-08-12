@@ -18,7 +18,7 @@ use Cake\Core\Configure;
 use Cake\Network\Exception\ForbiddenException;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
-
+use Cake\ORM\TableRegistry;
 /**
  * Static content controller
  *
@@ -42,7 +42,34 @@ class TestController extends AppController
     public function test()
     {
         // echo($this->request->testId);
+
+        $catQuery = TableRegistry::get('Category');
+        $category = $catQuery->get($this->request->testId);
+
+        $this->set('category', $category);
+        
     }
+
+    public function testing()
+    {
+        $quizQuery = TableRegistry::get('Questions');
+        $questions = $quizQuery->find('all')->where('category_id', $this->request->testId);
+        $questionsArray = $questions->toArray();
+        $questionId = 0;
+
+        $this->set('questions', $questionsArray);
+        $this->set('questionId', $questionId);
+
+
+        $answerQuery = TableRegistry::get('Answer');
+        $answers = $answerQuery->find('all', [
+            'conditions' => ['question_id' => ($questionId + 1)]
+        ]);
+        $answersArray = $answers->toArray();
+
+        $this->set('answers', $answersArray);
+    }
+
     public function display(...$path)
     {
         $count = count($path);

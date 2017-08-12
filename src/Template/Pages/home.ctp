@@ -64,18 +64,20 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
                 </tr>
             </thead>
             <tbody>
+                <?php foreach ($categories as $category): ?>
                 <tr>
-                    <td><a href="/test/1">HTML5 Test</a></td>
+                    <td><a href="<?php echo $this->Url->build(['_name' => 'test_prepage', 'testId' => $category->id ]); ?>"><?php echo $category->category_name ?></a></td>
+                    <td>Web Development</td>
+                </tr>
+                <?php endforeach; ?>
+                <!-- <tr>
+                    <td><a href="/test/2">PHP Test</a></td>
                     <td>Web Development</td>
                 </tr>
                 <tr>
-                    <td><a href="/test/2">CSS Test</a></td>
+                    <td><a href="/test/3">CSS Test</a></td>
                     <td>Web Development</td>
-                </tr>
-                <tr>
-                    <td><a href="/test/3">PHP Test</a></td>
-                    <td>Web Development</td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
     </div>

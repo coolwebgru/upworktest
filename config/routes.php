@@ -56,7 +56,14 @@ Router::scope('/', function (RouteBuilder $routes) {
      */
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
-    $routes->connect('/test/:testId', ['controller' => 'Test', 'action' => 'test']);
+    $routes->connect('/test/:testId/testing', 
+            ['controller' => 'Test', 'action' => 'testing'], 
+            ['_name' => 'test_testing']);
+
+    $routes->connect('/test/:testId', 
+            ['controller' => 'Test', 'action' => 'test'], 
+            ['_name' => 'test_prepage']);
+
     /**
      * Connect catchall routes for all controllers.
      *

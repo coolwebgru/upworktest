@@ -51,8 +51,15 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
     <div class="header-image"><b>Upwork Test</b></div>
 </header>
 
-<div class="row main-body">
-
+<div class="row main-body padding-left-50">
+    <div class="margin-top-20">
+        You can start <b><?php echo $category->category_name ?></b> now.
+        <br>
+        Please click the Start button to Start Test.
+    </div>
+    <div class="margin-top-20">
+        <a href="<?php echo $this->Url->build(['_name' => 'test_testing', 'testId' => $category->id ]); ?>" class="btn-start">Start</a>
+    </div>
 </div>
 </body>
 </html>

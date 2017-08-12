@@ -18,6 +18,7 @@ use Cake\Core\Configure;
 use Cake\Network\Exception\ForbiddenException;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
+use Cake\ORM\TableRegistry;
 
 /**
  * Static content controller
@@ -40,6 +41,11 @@ class PagesController extends AppController
      */
     public function display(...$path)
     {
+        $catQuery = TableRegistry::get('Category');
+        $categories = $catQuery->find('all');
+
+        $this->set('categories', $categories);
+
         $count = count($path);
         if (!$count) {
             return $this->redirect('/');
