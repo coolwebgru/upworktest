@@ -52,27 +52,18 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
 </header>
 
 <div class="row main-body">
-    <form class="container" method="post" action="<?php echo $this->Url->build(['_name' => 'test_testing', 'testId' => $categoryId ]); ?>">
-        
-        <div class="margin-top-20 font-22px">
-            <b>Question:</b>
-        </div>
-        <div class="font-20px">
-            <?php echo $questions[$questionId]->question_content ?>
-        </div>
+    <div class="container">
         <div class="margin-top-50 font-22px">
-            <b>Answers:</b>
+            Your score is 
+            <?php if ($correctAnswers):
+                echo round(5 * $correctAnswers / $questionCount, 2); 
+                else: echo 0;
+            endif;?>
         </div>
-        <div class="margin-top-20">
-            <?php foreach($answers as $answer): ?>
-            <input class="answer-radio margin-top-5" type='radio' value='<?php echo $answer->id ?>' name='answer_radio' id='<?php echo $answer->id ?>'/>
-            <label class="margin-top-5 answer-label font-15px" for='<?php echo $answer->id ?>'><?php echo $answer->answer ?></label>
-            <?php endforeach; ?>
+        <div class="margin-top-50">
+            <a href="/" class="btn-continue">Done</a>
         </div>
-        <div class="margin-top-120">
-            <input type="submit" class="btn-continue" value="Continue"/>
-        </div>
-    </form>
+    </div>
 </div>
 </body>
 </html>

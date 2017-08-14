@@ -60,9 +60,28 @@ Router::scope('/', function (RouteBuilder $routes) {
             ['controller' => 'Test', 'action' => 'testing'], 
             ['_name' => 'test_testing']);
 
+    // $routes->post(
+    //     '/test/:testId/testing',
+    //     ['controller' => 'Test', 'action' => 'next']
+    // );
+    // $routes->connect(
+    //     '/test/:testId/testing',
+    //     ['controller' => 'Test', 'action' => 'next']
+    // )->setMethods(['POST']);
+
     $routes->connect('/test/:testId', 
             ['controller' => 'Test', 'action' => 'test'], 
             ['_name' => 'test_prepage']);
+
+    $routes->connect('/test/:testId/finish', 
+            ['controller' => 'Test', 'action' => 'testFinish'], 
+            ['_name' => 'test_finishpage']);
+
+    // $routes->post(
+    //     '/test/:testId/testing',
+    //     ['controller' => 'Test', 'action' => 'next'],
+    //     'next'
+    // );
 
     /**
      * Connect catchall routes for all controllers.

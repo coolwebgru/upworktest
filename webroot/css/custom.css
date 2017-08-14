@@ -45,6 +45,7 @@
     border-radius: 7px;
     transition: all .2s ease-in;
     background: rgba(20, 29, 61, 1);
+    float: right;
 }
 
 .btn-continue:hover {
@@ -70,7 +71,8 @@
 }
 
 .answer-container {
-	border: 1px solid rgb(212, 212, 212);
+	/*border: 1px solid rgb(212, 212, 212);*/
+	line-height: 37px;
 }
 
 .font-17px {
@@ -79,4 +81,39 @@
 
 .margin-top-5 {
 	margin-top: 5px;
+}
+
+.answer-radio {
+    visibility:hidden;
+}
+
+.answer-label {
+    cursor: pointer;
+}
+
+.answer-radio:checked + .answer-label {
+    border: 2px solid green;
+}
+
+.answer-label {
+	padding-left: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	float: right;
+	width: 90%;
+/*	height: 37px;
+	line-height: 37px;*/
+	border: 1px solid rgb(212, 212, 212);
+}
+
+.answer-label:overflow {
+	height: 74px;
+}
+
+.margin-top-120 {
+	margin-top: 120px;
+}
+
+.font-15px {
+	font-size: 15px;
 }

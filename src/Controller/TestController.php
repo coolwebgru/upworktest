@@ -52,22 +52,87 @@ class TestController extends AppController
 
     public function testing()
     {
+        // $catQuery = TableRegistry::get('Category');
+        // $category = $catQuery->get($this->request->testId);
+
+        $session = $this->request->session();
         $quizQuery = TableRegistry::get('Questions');
-        $questions = $quizQuery->find('all')->where('category_id', $this->request->testId);
+        $questions = $quizQuery->find('all', [
+                'conditions' => ['category_id' => ($this->request->testId)]
+            ]);
         $questionsArray = $questions->toArray();
-        $questionId = 0;
+        $session->write('questionCount', count($questionsArray));
 
-        $this->set('questions', $questionsArray);
-        $this->set('questionId', $questionId);
+        if($this->request->is('post')){
+            $this->next($questionsArray);
 
+            $questionId = $session->read('questionId');
+        } else {
+            $questionId = 0;
+            $session->write('questionId', $questionId);
+            $session->write('correctAnswers', 0);
+        }
+
+        
+
+        if (count($questionsArray) > $questionId) {
+            $this->set('questions', $questionsArray);
+            $this->set('questionId', $questionId);
+            $this->set('categoryId', $this->request->testId);
+
+            $answerQuery = TableRegistry::get('Answer');
+            $answers = $answerQuery->find('all', [
+                'conditions' => ['question_id' => ($questionsArray[$questionId]->id)]
+            ]);
+            $answersArray = $answers->toArray();
+
+            $this->set('answers', $answersArray);
+        }
+        else 
+        {
+            $correctAnswers = $session->read('correctAnswers');
+
+            $this->redirect("/test/".$this->request->testId."/finish");
+        }
+            
+    }
+
+    public function next($questionsArray)
+    {
+        $session = $this->request->session();
+        
+        $selectedAnswerId = $this->request->data['answer_radio'];
+
+        $questionId = $session->read('questionId');
+        $correctAnswers = $session->read('correctAnswers');
 
         $answerQuery = TableRegistry::get('Answer');
-        $answers = $answerQuery->find('all', [
-            'conditions' => ['question_id' => ($questionId + 1)]
-        ]);
-        $answersArray = $answers->toArray();
+        $selectedAnswer = $answerQuery->find('all', [
+            'conditions' => ['id' => $selectedAnswerId]
+            ]);
+        $answersArray = $selectedAnswer->toArray();
 
-        $this->set('answers', $answersArray);
+        var_dump($answersArray[0]);
+        if ($answersArray[0]->value) {
+            $correctAnswers++;
+            $session->write('correctAnswers', $correctAnswers);
+        }
+
+        $questionId++;
+        $session->write('questionId', $questionId);
+
+
+    }
+
+    public function testFinish()
+    {
+        $session = $this->request->session();
+
+        $questionCount = $session->read('questionCount');
+        $correctAnswers = $session->read('correctAnswers');
+
+        $this->set('questionCount', $questionCount);
+        $this->set('correctAnswers', $correctAnswers);
     }
 
     public function display(...$path)
